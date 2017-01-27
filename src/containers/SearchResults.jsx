@@ -3,7 +3,7 @@ import gql from 'graphql-tag'
 import { graphql, compose } from 'react-apollo'
 import ResultList from '../components/Results.jsx'
 
-const SearchResults = ({ data, query }) => {
+const SearchResults = ({ data, query, lookFor }) => {
   if (data.loading) {
     return (
       <div>
@@ -12,12 +12,12 @@ const SearchResults = ({ data, query }) => {
     )
   }
 
-  const results = data.search.artists
+  const results = lookFor === 'artists' ? data.search.artists : data.search.works
   return (
     <div>
       {results.totalCount === 0
         ? <div>There are no results for the given query.</div>
-        : <ResultList results={results} query={query} />
+        : <ResultList results={results} query={query} type={lookFor} />
       }
     </div>
   )
@@ -25,13 +25,14 @@ const SearchResults = ({ data, query }) => {
 
 SearchResults.propTypes = {
   data: PropTypes.object.isRequired,
-  query: PropTypes.string.isRequired
+  query: PropTypes.string.isRequired,
+  lookFor: PropTypes.string.isRequired
 }
 
 const Search = gql`
-  query Search($query: String!) {
+  query Search($query: String!, $artists: Boolean!, $works: Boolean!) {
     search {
-      artists(query: $query) {
+      artists(query: $query) @include(if: $artists) {
         edges {
           node {
             id,
@@ -44,6 +45,23 @@ const Search = gql`
         }
         totalCount
       }
+      works(query: $query) @include(if: $works) {
+        edges {
+          node {
+            id,
+            title,
+            language,
+            artists {
+              edges {
+                node {
+                  name
+                }
+              }
+            }
+          }
+        }
+        totalCount
+      }
     }
   }
 `
@@ -51,8 +69,13 @@ const Search = gql`
 export default compose(
   graphql(Search,
     {
-      // options: { variables: { query: 'Roxette' } }
-      options: ({ query }) => ({ variables: { query } })
+      options: ({ query, lookFor }) => ({
+        variables: {
+          query,
+          artists: lookFor === 'artists',
+          works: lookFor === 'songs'
+        }
+      })
     }
   )
 )(SearchResults)
