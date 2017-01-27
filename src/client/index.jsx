@@ -8,6 +8,7 @@ import routes from '../routes'
 import Store from '../store'
 import { ApolloProvider } from 'react-apollo'
 import ApolloClientSingleton from '../network/apollo-client-singleton'
+import '../assets/milligram.min.css'
 
 window.onerror = (msg, file, line, col, error) => { errorCatcher(error) }
 window.addEventListener('unhandledrejection', (event) => { errorCatcher(event.reason) })

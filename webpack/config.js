@@ -27,7 +27,7 @@ const config = {
     noParse: [],
     loaders: [
       { test: /\.json$/, loader: 'json' },
-      { test: /\.css$/, loader: 'style!css' },
+      { test: /\.css$/, loader: 'style-loader!css-loader' },
       {
         test: /\.jsx?$/,
         loader: 'babel-loader',
