@@ -1,7 +1,7 @@
 {
-  "name": "react-apollo-starter-kit",
-  "version": "1.0.0",
-  "description": "React Apollo starter kit",
+  "name": "graphbrainz-client",
+  "version": "0.1.0",
+  "description": "Experimental project in order to try GraphQL with Apollo and React.",
   "main": "src/server",
   "engines": {
     "node": "6.2.2",
@@ -22,25 +22,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/saikat/react-apollo-starter-kit.git"
+    "url": "git+https://github.com/nandito/graphbrainz-client"
   },
   "keywords": [
     "react-apollo-starter-kit",
-    "sms",
-    "texting",
-    "campaigns",
-    "campaigning",
-    "politics",
-    "activism",
-    "organizing",
-    "field"
+    "graphbrainz"
   ],
-  "author": "Saikat Chakrabarti",
+  "author": "Nandor Biro",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/saikat/react-apollo-starter-kit/issues"
-  },
-  "homepage": "https://github.com/saikat/saikat/react-apollo-starter-kit/#readme",
+  "homepage": "https://github.com/nandito/graphbrainz-client",
   "dependencies": {
     "aphrodite": "^0.4.1",
     "apollo-client": "^0.5.2",

@@ -2,6 +2,7 @@ import ApolloClient, { addQueryMerging } from 'apollo-client'
 import ResponseMiddlewareNetworkInterface from './response-middleware-network-interface'
 import log from '../log'
 
+// Set Graphbrainz url here
 const responseMiddlewareNetworkInterface = new ResponseMiddlewareNetworkInterface('http://localhost:3001/graphql')
 
 // Sample error handling middleware
@@ -24,4 +25,5 @@ const ApolloClientSingleton = new ApolloClient({
   shouldBatch: true,
   dataIdFromObject: obj => obj.id
 })
+
 export default ApolloClientSingleton
