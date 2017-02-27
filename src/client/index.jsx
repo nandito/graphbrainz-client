@@ -13,6 +13,10 @@ import '../assets/milligram.min.css'
 window.onerror = (msg, file, line, col, error) => { errorCatcher(error) }
 window.addEventListener('unhandledrejection', (event) => { errorCatcher(event.reason) })
 
+if (typeof window !== 'undefined') {
+  window.__APOLLO_CLIENT__ = ApolloClientSingleton
+}
+
 const store = new Store(browserHistory, window.INITIAL_STATE)
 const history = syncHistoryWithStore(browserHistory, store.data)
 
